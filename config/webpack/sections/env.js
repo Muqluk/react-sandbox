@@ -11,6 +11,7 @@ const env = () => {
     appPath: path.join(root, "src"),
     buildPath: path.join(root, "build"),
     staticAssets: path.join(root, "public"),
+    devtool: isProd ? undefined : "source-map",
     /* */
     /* devServer */
     url: "localhost",

@@ -1,4 +1,4 @@
-const env = require("./env");
+const env = require('./env');
 
 devServer = () => {
   const { allowedHosts, staticAssets, port, errOverlay, headers } = env;
@@ -8,13 +8,13 @@ devServer = () => {
     headers,
     bonjour: false,
     client: {
-      logging: "error", //  'log' | 'info' | 'warn' | 'error' | 'none' | 'verbose'
+      logging: 'error', //  'log' | 'info' | 'warn' | 'error' | 'none' | 'verbose'
       overlay: errOverlay,
       progress: true,
     },
     compress: false,
     historyApiFallback: true,
-    host: "localhost",
+    host: 'localhost',
     hot: true,
     liveReload: false,
     open: true,
@@ -24,7 +24,7 @@ devServer = () => {
       // more info on devMiddleware
       // https://github.com/webpack/webpack-dev-middleware
       index: true,
-      publicPath: "/",
+      publicPath: '/',
       writeToDisk: false,
     },
   };
