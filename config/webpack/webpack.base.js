@@ -1,10 +1,11 @@
-const path = require("path");
-const devServer = require("./webpack.devserver");
+const PnpWebpackPlugin = require("pnp-webpack-plugin");
+const env = require("./sections/env");
+const moduleRules = require("./sections/webpack.module.rules");
+const plugins = require("./sections/webpack.plugins");
+const devServer = require("./sections/webpack.devserver");
 
-module.exports = (api) => {
-  const isProd = process.env.NODE_ENV === "production";
-  const projectPath = path.resolve(process.cwd());
-
+module.exports = () => {
+  const { isProd, projectPath, buildPath, aliasPaths, allowedExtensions } = env;
   const base = {
     mode: isProd ? "production" : "development",
     context: projectPath,
@@ -13,25 +14,24 @@ module.exports = (api) => {
     output: {
       clean: true,
       filename: "js/bundle.[chunkhash:8].js",
-      path: isProd ? `${projectPath}/build` : undefined,
-      publicPath: isProd ? "https://path_from_env_vars/" : auto,
+      path: isProd ? buildPath : undefined,
+      publicPath: isProd ? "https://path_from_env_vars/" : "./",
     },
     module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/,
-          loader: "babel-loader",
-        },
-      ],
+      rules: moduleRules,
     },
-    // resolve: {},
-    // plugins: [],
+    resolve: {
+      alias: aliasPaths,
+      extensions: [...allowedExtensions.filter(Boolean)],
+      modules: ["node_modules"].filter(Boolean),
+      plugins: [PnpWebpackPlugin].filter(Boolean),
+    },
+    resolveLoader: {
+      plugins: [PnpWebpackPlugin.moduleLoader(module)],
+    },
+    plugins,
+    devServer,
     // stats: '',
-    devServer: {
-      allowedHosts: ["auto"],
-      host: "localhost",
-      port: 2593,
-    },
   };
 
   console.dir(base);
