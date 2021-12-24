@@ -1,4 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import './styles/index.less';
 
-ReactDOM.render(<div>Hello World</div>, document.getElementById('app'));
+import { App } from './app/app';
+
+ReactDOM.render(<App />, document.getElementById('app'));
