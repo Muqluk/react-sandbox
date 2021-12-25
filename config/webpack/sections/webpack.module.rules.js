@@ -1,22 +1,4 @@
 const rules = () => {
-  const postcssLoader = {
-    loader: require.resolve('postcss-loader'),
-    options: {
-      postcssOptions: {
-        plugins: () => [
-          require('postcss-flexbugs-fixes'),
-          require('postcss-preset-env')({
-            autoprefixer: {
-              flexbox: 'no-2009',
-            },
-            stage: 3,
-          }),
-        ],
-      },
-      sourceMap: true,
-    },
-  };
-
   const cssLoader = {
     loader: require.resolve('css-loader'),
     options: {
@@ -34,36 +16,25 @@ const rules = () => {
           use: [
             require.resolve('style-loader'), //
             cssLoader,
-            postcssLoader,
           ],
         },
-        {
-          test: /\.module\.css$/,
-          exclude: /\.css$/,
-          use: [
-            require.resolve('style-loader'), //
-            cssLoader,
-            postcssLoader,
-          ],
-        },
-        {
-          test: /\.less$/i,
-          use: [
-            require.resolve('style-loader'), //
-            cssLoader,
-            postcssLoader,
-            {
-              loader: 'less-loader',
-              options: {
-                lessOptions: {
-                  sourceMap: true,
-                  javascriptEnabled: true,
-                  plugins: [require('@cc/ui-components/dist/Styles/less-plugins/less-plugins')],
-                },
-              },
-            },
-          ],
-        },
+        // {
+        //   test: /\.less$/i,
+        //   use: [
+        //     require.resolve('style-loader'), //
+        //     cssLoader,
+        //     {
+        //       loader: 'less-loader',
+        //       options: {
+        //         lessOptions: {
+        //           sourceMap: true,
+        //           javascriptEnabled: true,
+        //           plugins: [require('@cc/ui-components/dist/Styles/less-plugins/less-plugins')],
+        //         },
+        //       },
+        //     },
+        //   ],
+        // },
         {
           test: /\.(js|jsx)$/,
           loader: 'babel-loader',
