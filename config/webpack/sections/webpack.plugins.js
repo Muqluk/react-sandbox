@@ -19,7 +19,6 @@ module.exports = [
     PropTypes: 'prop-types',
   }),
   new CleanWebpackPlugin({
-    dry: false,
     verbose: false,
     cleanStaleWebpackAssets: true,
     protectWebpackAssets: true,

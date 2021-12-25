@@ -2,7 +2,6 @@ const rules = () => {
   const postcssLoader = {
     loader: require.resolve('postcss-loader'),
     options: {
-      // ident: 'postcss',
       postcssOptions: {
         plugins: () => [
           require('postcss-flexbugs-fixes'),
